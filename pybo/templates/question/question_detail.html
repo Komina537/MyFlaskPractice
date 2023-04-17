@@ -1,0 +1,203 @@
+<!-- 2-09 표준 HTML과 템플릿 상속 사용해 보기 부분에서 삭제되는 코드-->
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">-->
+
+{% extends 'base.html' %}   <!-- 2-09 표준 HTML과 템플릿 상속 사용해 보기 에서 추가되는 코드-->
+{% block content %}         <!-- 2-09 표준 HTML과 템플릿 상속 사용해 보기 에서 추가되는 코드-->
+<div class="container my-3">
+    <!-- flash 오류 -->
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    <!-- 질문 -->
+    <h2 class="border-bottom py-2">{{ question.subject }}</h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text"> <!--style="white-space: pre-line;"-->{{ question.content|markdown }}</div>
+            <div class="d-flex justify-content-end">
+                {% if question.modify_date %}
+                <div class="badge bg-light text-dark p-2 text-start mx-3">
+                    <div class="mb-2">modified at</div>
+                    <div>{{ question.modify_date|datetime }}</div>
+                </div>
+                {% endif %}
+                <div class="badge bg-light text-dark p-2 text-start" >
+                    <div class="mb-2">{{ question.user.username }}</div>
+                    <!-- 이전 코드 -->
+<!--                <div>{{ question.create_date }}</div>           -->
+                    <div>{{ question.create_date|datetime }}</div>  <!-- 3-03 필터 사용해 보기 -->
+                </div>
+            </div>
+            <div class="my-3">
+                <a href="javascript:void(0)" data-uri="{{ url_for('question.vote', question_id=question.id) }}"
+                   class="recommend btn btn-sm btn-outline-secondary"> 추천
+                    <span class="badge rounded-pill bg-success">{{ question.voter|length }}</span>
+                </a>
+                {% if g.user == question.user %}
+                <a href="{{ url_for('question.modify', question_id=question.id) }}"
+                   class="btn btn-sm btn-outline-secondary">수정</a>
+                <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
+               data-uri="{{ url_for('question.delete', question_id=question.id) }}">삭제</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- 답변 목록 -->
+    <h5 class="border-bottom my-3 py-2">{{ question.answer_set|length }}개의 답변이 있습니다.</h5>
+    {% for answer in question.answer_set %}
+    <a id="answer_{{ answer.id }}"></a>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text"> <!--style="white-space: pre-line;"-->{{ answer.content|markdown }}</div>
+            <div class="d-flex justify-content-end">
+                {% if answer.modify_date %}
+                <div class="badge bg-light text-dark p-2 text-start mx-3">
+                    <div class="mb-2">modified at</div>
+                    <div>{{ answer.modify_date|datetime }}</div>
+                </div>
+                {% endif %}
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div class="mb-2">{{ answer.user.username }}</div>
+                    <!-- 이전 코드 -->
+<!--                <div>{{ answer.create_date }}</div>             -->
+                    <div>{{ answer.create_date|datetime }}</div>    <!-- 3-03 필터 사용해 보기 -->
+                </div>
+            </div>
+            <div class="my-3">
+                <a href="javascript:void(0)" data-uri="{{ url_for('answer.vote', answer_id=answer.id) }}"
+                   class="recommend btn btn-sm btn-outline-secondary"> 추천
+                    <span class="badge rounded-pill bg-success">{{ answer.voter|length }}</span>
+                </a>
+                {% if g.user == answer.user %}
+                <a href="{{ url_for('answer.modify', answer_id=answer.id) }}"
+                   class="btn btn-sm btn-outline-secondary">수정</a>
+                <a href="#" class="delete btn btn-sm btn-outline-secondary "
+               data-uri="{{ url_for('answer.delete', answer_id=answer.id) }}">삭제</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- 답변 등록 -->
+    <form action="{{ url_for('answer.create', question_id=question.id) }}" method="post" class="my-3">
+<!--  ================ 2-10 CSRF 코드와 오류 표시 기능 추가하기 ===============   -->
+        {{ form.csrf_token }}
+        <!-- 오류표시 Start -->
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field, errors in form.errors.items() %}
+            <strong>{{ form[field].label }}</strong>
+            <ul>
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- 오류표시 End -->
+<!--    ================================================================    -->
+        <div class="mb-3">
+            <textarea {% if not g.user %}disabled{% endif %} name="content" id="content" class="form-control" rows="10"></textarea>
+        </div>
+        <input type="submit" value="답변등록" class="btn btn-primary">
+    </form>
+</div>
+{% endblock %}
+{% block script %}
+<script type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+
+const recommend_elements = document.getElementsByClassName("recommend");
+Array.from(recommend_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 추천하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+</script>
+{% endblock %}          <!-- 2-09 표준 HTML과 템플릿 상속 사용해 보기 에서 추가되는 코드-->
+
+
+
+
+<!-- =============== 2-07 화면 예쁘게 꾸미기 부분에서 실습했던 코드 (이후에 쓰지 않는 코드) =============== -->
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">-->
+
+
+<!-- =============== 2-05 질문 목록과 질문 상세 기능 만들기 부분에서 실습했던 코드 (이후에 쓰지 않는 코드) =============== -->
+<!--<h1>{{ question.subject }}</h1>-->
+<!--<div>-->
+<!--    {{ question.content }}-->
+<!--</div>-->
+
+<!-- {{ question.subject }}와 {{ question.content }}의 question은 render_template 함수에 전달한 질문 객체이다.
+이제 웹 브라우저에서 http://localhost:5000/detail/2/ 페이지를 다시 요청해 보자.
+그러면 question_id가 2인 질문의 제목과 내용이 표시된다. -->
+
+
+<!-- =============== 2-06 답변 등록 기능 만들기 부분에서 실습했던 코드 (이후에 쓰지 않는 코드) =============== -->
+<!--<h5>{{ question.answer_set|length }}개의 답변이 있습니다.</h5>-->
+<!--<div>-->
+<!--    <ul>-->
+<!--    {% for answer in question.answer_set %}-->
+<!--        <li>{{ answer.content }}</li>-->
+<!--    {% endfor %}-->
+<!--    </ul>-->
+<!--</div>-->
+<!--<form action="{{ url_for('answer.create', question_id=question.id) }}" method="post">-->
+<!--    <textarea name="content" id="content" rows="15"></textarea>-->
+<!--    <input type="submit" value="답변등록">-->
+<!--</form>-->
+
+<!--기존 코드에서 답변을 확인할 수 있는 영역을 추가했다.
+{{ question.answer_set|length }} 코드는 답변 개수를 의미한다.
+length는 템플릿 필터인데 객체의 길이를 반환해 준다.
+이처럼 템플릿 필터는 | 문자 뒤에 추가해서 사용한다.-->
+
+<!-- ======= 2-08 질문 상세에 부트스트랩 적용하기 부분에서 실습했던 코드 (기존의 코드(2-07이전의 코드) 전체를 수정) ======= -->
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">-->
+<!--<div class="container my-3">-->
+<!--    &lt;!&ndash; 질문 &ndash;&gt;-->
+<!--    <h2 class="border-bottom py-2">{{ question.subject }}</h2>-->
+<!--    <div class="card my-3">-->
+<!--        <div class="card-body">-->
+<!--            <div class="card-text" style="white-space: pre-line;">{{ question.content }}</div>-->
+<!--            <div class="d-flex justify-content-end">-->
+<!--                <div class="badge bg-light text-dark p-2">-->
+<!--                    {{ question.create_date }}-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; 답변 목록 &ndash;&gt;-->
+<!--    <h5 class="border-bottom my-3 py-2">{{ question.answer_set|length }}개의 답변이 있습니다.</h5>-->
+<!--    {% for answer in question.answer_set %}-->
+<!--    <div class="card my-3">-->
+<!--        <div class="card-body">-->
+<!--            <div class="card-text" style="white-space: pre-line;">{{ answer.content }}</div>-->
+<!--            <div class="d-flex justify-content-end">-->
+<!--                <div class="badge bg-light text-dark p-2">-->
+<!--                    {{ answer.create_date }}-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    {% endfor %}-->
+<!--    &lt;!&ndash; 답변 등록 &ndash;&gt;-->
+<!--    <form action="{{ url_for('answer.create', question_id=question.id) }}" method="post" class="my-3">-->
+<!--        <div class="mb-3">-->
+<!--            <textarea name="content" id="content" class="form-control" rows="10"></textarea>-->
+<!--        </div>-->
+<!--        <input type="submit" value="답변등록" class="btn btn-primary">-->
+<!--    </form>-->
+<!--</div>-->

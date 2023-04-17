@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- 2-10 질문 등록 템플릿 작성하기 부분 -->
+<!-- 질문 등록 -->
+<!--<div class="container">-->
+<!--    <h5 class="my-3 border-bottom pb-2">질문등록</h5>-->
+<!--    <form method="post" class="my-3">-->
+
+<!--            {{ form.subject.label }}    라벨 표시       -->
+<!--            {{ form.subject() }}        입력폼 표시     -->
+
+<!--            {{ form.content.label }}-->
+<!--            {{ form.content() }}-->
+
+<!--    ---       2-10 폼에 부트스트랩 적용하기       ---    -->
+<!--        {{ form.subject.label }}-->
+<!--        {{ form.subject(class="form-control") }}-->
+
+<!--        {{ form.content.label }}-->
+<!--        {{ form.content(class="form-control") }}-->
+
+<!--        <button type="submit" class="btn btn-primary">저장하기</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--수작업으로 폼 작성하는 코드-->
+<!-- 질문 등록 -->
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+    <form method="post" class="my-3">
+<!--    CSRF 토큰 오류 처리하기         -->
+    {{ form.csrf_token }}
+<!--    오류 내용을 표시해 원인 알아내기 코드 시작    -->
+    <!-- 오류표시 Start -->
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field, errors in form.errors.items() %}
+            <strong>{{ form[field].label }}</strong>
+            <ul>
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- 오류표시 End -->
+<!--    오류 내용을 표시해 원인 알아내기 코드 끝      -->
+
+        <div class="mb-3">
+            <label for="subject">제목</label>
+<!--        <input type="text" class="form-control" name="subject" id="subject">  이전코드  -->
+<!--        2-10 입력한 값 유지하는 코드          -->
+            <input type="text" class="form-control" name="subject" id="subject" value="{{ form.subject.data or '' }}">
+
+        </div>
+        <div class="mb-3">
+            <label for="content">내용</label>
+<!--        <textarea class="form-control" name="content" id="content" rows="10"></textarea>  이전코드  -->
+<!--        2-10 입력한 값 유지하는 코드          -->
+            <textarea class="form-control" name="content" id="content" rows="10">{{ form.content.data or '' }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">저장하기</button>
+    </form>
+</div>
+
+{% endblock %}
+
+
+

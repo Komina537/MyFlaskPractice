@@ -1,0 +1,8 @@
+2-07 화면 예쁘게 꾸미기 부분에서 실습했던 코드 (2-09 이후에 쓰지 않는 코드)
+2-09 표준 HTML과 템플릿 사용해 보기 부분에서 삭제
+textarea {
+    width:100%;
+}
+input[type=submit] {
+    margin-top:10px;
+}
