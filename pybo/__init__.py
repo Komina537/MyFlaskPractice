@@ -41,7 +41,8 @@ migrate = Migrate()
 
 def create_app():   # create_app 함수가 애플리케이션 팩토리
     app = Flask(__name__)
-    app.config.from_object(config)              # 2-04 모델로 데이터 처리하기
+    # app.config.from_object(config)              # 2-04 모델로 데이터 처리하기
+    app.config.from_envvar('APP_CONFIG_FILE')   # 4-08 서버 개발 환경을 위한 config 분리하기
 
     # ORM -----------------------------------   # 2-04 모델로 데이터 처리하기
     db.init_app(app)
