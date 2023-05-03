@@ -1,0 +1,590 @@
+/* 구글 폰트 import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Varela+Round&display=swap');
+
+.slide {
+    /* layout */
+    display: flex;
+    flex-wrap: nowrap;
+    /* 컨테이너의 내용물이 컨테이너 크기(width, height)를 넘어설 때 보이지 않도록 하기 위해 hidden을 준다. */
+    overflow: hidden;
+  
+    /* position */
+    /* slide_button의 position absolute가 컨테이너 안쪽에서 top, left, right offset이 적용될 수 있도록 relative를 준다. (기본값이 static인데, static인 경우 그 상위 컨테이너로 나가면서 현재 코드에선 html을 기준으로 offset을 적용시키기 때문) */
+    position: relative;
+  
+    /* size */
+    width: 100%;
+  
+    /* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
+    user-select: none;
+  }
+  .slide_item {
+    /* layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    /* position - 버튼 클릭시 left offset값을 적용시키기 위해 */
+    position: relative;
+    left: 0px;
+  
+    /* size */
+    width: 100%;
+    height: 400px;
+    /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
+    flex-shrink: 0;
+  
+    /* transition */
+    transition: left 0.15s;
+  }
+  .slide_button {
+    /* layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    /* position */
+    position: absolute;
+    /* 버튼이 중앙에 위치하게 하기위해 계산 */
+    top: calc(50% - 16px);
+  
+    /* size */
+    width: 32px;
+    height: 32px;
+  
+    /* style */
+    border-radius: 100%;
+    background-color: #cccc;
+    cursor: pointer;
+  }
+  
+  .slide_prev_button {
+    left: 10px;
+  }
+  .slide_next_button {
+    right: 10px;
+  }
+  
+  /* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
+  .slide_item.item1 {
+    background-color: rgb(255, 255, 255);
+  }
+  .slide_item.item2 {
+    background-color: rgb(255, 255, 255);
+  }
+  .slide_item.item3 {
+    background-color: rgb(255, 255, 255);
+  }
+  .slide_item.item4 {
+    background-color: rgb(255, 255, 255);
+  }
+  .slide_item.item5 {
+    background-color: rgb(255, 255, 255);
+  }
+  
+  /* 페이지네이션 스타일 */
+  ul,
+  li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  .slide_pagination {
+    /* layout */
+    display: flex;
+    gap: 5px;
+  
+    /* position */
+    position: absolute;
+    bottom: 0;
+    /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .slide_pagination > li {
+    /* 현재 슬라이드가 아닌 것은 투명도 부여 */
+    color: #7fb5ff88;
+    cursor: pointer;
+    font-size: 25px;
+  }
+  .slide_pagination > li.active {
+    /* 현재 슬라이드 색상은 투명도 없이 */
+    color: #7fb5ff;
+  }
+  
+  .slide_item_duplicate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 0px;
+    width: 100%;
+    height: 300px;
+    flex-shrink: 0;
+    transition: left 0.15s;
+  }
+
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+a, a:link, a:visited{
+  color:inherit;
+  text-decoration:none;
+}
+li{
+  list-style:none;
+}
+.container{ /* ① */ /* 전체 프로젝트의 기준 너비 (보통 1140px) 를 유지하기 위한 래퍼(Wrapper) 역할을 한다. */
+  width:1140px;
+  margin:0 auto; /* margin 속성값 : 위, 아래는 0 , 왼쪽, 오른쪽은 auto ==> 수평방향에서 중앙에 위치 */
+}
+header{ /* ② */
+  position:fixed; /* absolute -> fiexd */
+  color:rgb(255, 255, 255); /* black -> white */ /* ?????? */
+  top:0;
+  z-index:2; /* position 속성을 지정하면 모든 HTML 요소의 z-index 속성값은 기본으로 0이됨 ==> 스크롤시 다른요소 밑에 가려서 안보이지 않도록 헤더의 z-index 속성값을 0보다 크게 줍니다.*/
+  width:100%;
+  padding:1rem;
+}
+header .h1{
+  width:300px;
+}
+header .container{
+  display:flex; /* 레이아웃 형태를 유지하기 쉽도록 */
+  justify-content:space-between; /* 하위에 자식 태그가 2개 있을때 각각 왼쪽 끝과 오른쪽 끝으로 붙음 */
+  align-items:center;
+  width:100%;
+}
+header nav ul{ /* 메뉴를 가로 한 줄로 배치하기 위해 display 속성값을 flex 로 지정 */
+  display:flex;
+}
+header nav ul li{
+  padding:10px;
+}
+header button{
+  background:transparent;
+  border:0;
+  cursor:pointer;
+}
+header h1 button{
+  font-size:2rem; 
+  font-weight:bold; 
+  color:white; /* 텍스트 색상 흰색으로 */
+}
+header nav ul li button{
+  font-size:1.2rem; 
+  color:white; /* 텍스트 색상 흰색으로 */
+}
+
+/* javascript 2번째 이슈 해결을 위한 header css 코드 추가 */
+header.active{
+    background-color:rgb(0, 0, 0); /* rgba(0,0,0); */
+    animation:fadeIn 0.5s ease-in-out;
+  }
+  @keyframes fadeIn{
+    0%{
+      opacity:0;
+    }
+    100%{
+      opacity:1;
+    }
+  }
+
+/* Main Part */  
+  main{
+    width:100%;
+    height:100vh;
+    color:white;
+    /* background:linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('images/img1.jpg') center center; 배경색이 이미지를 덮는 효과 */
+    background-size:cover;
+    display:flex; /* 수직 방향에서 요소들이 중앙에 위치하도록 display 속성값을 flex로 지정 */
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+  }
+
+/* About Me Section 영역 CSS 코드*/
+section{
+    font-family:"Poppins", sans-serif;
+    padding:5rem 0;
+  }
+  section:nth-child(2n){ /* :nth-child 가상 클래스 선택자를 사용해서 (2n):짝수 번째 섹션 영역을 따로 속성 부여*/
+    background-color:#f8f8f8; /* 배경색을 Gray */
+  }
+  
+  /* 섹션 영역 전체 제목 설정하는 CSS */
+  section .title{
+    margin-bottom:3rem;
+  }
+  section .title h4{
+    font-size:1.35rem;
+    color:#ed4848;
+    position:relative;
+  }
+  section .title h2{
+    font-size:3.5rem; 
+  }
+  section .title p{
+    font-size:1.15rem;
+  }
+  
+  /* About Me 본문 영역 */
+  /* float 속성 해제 : 적용 대상의 원래 위치를 보장하지 않으므로 Clear 속성으로 float 속성을 해제해야함.*/
+  section .about-self::after{
+    content:"";
+    clear:both;
+    display:block;
+  }
+  /* 본문 너비 절반 지정 & 왼쪽 배치 */
+  section .about-self .left{
+    width:50%;
+    height: 500px;
+    float:left;
+    
+  }
+  /* 이미지 크기가 부모 영역을 넘지 않도록 부모 영역의 최대 크기로 지정 */
+  section .about-self .left img{
+    max-width:100%;
+    height: 500px;
+    position: absolute;
+    object-fit: cover;
+  }
+  section .about-self .left .active{
+    z-index:1;
+  }
+  
+  /* 본문 너비 절반 지정 & 오른쪽 배치 */
+  section .about-self .right{
+    width:50%;
+    float:left;
+    padding:0 2rem;
+  }
+  
+  /* 본문 오른쪽 h3 태그의 글자 크기와 여백 지정 */
+  section .about-self .right h3{
+      font-size:2.25rem;
+      margin-bottom:1rem;
+  }
+  /* 본문 오른쪽 h3 태그의 strong 태그 색상 강조 */
+  section .about-self .right h3 strong{
+    color:#2e522e;
+  }
+  /* 본문 오른쪽 p 태그의 크기와 여백 지정 */
+  section .about-self .right p{
+    font-size:1.15rem;
+    margin:1rem 0;
+  }
+  /* 본문 오른쪽의 아이콘 폰트 크기와 여백 지정 */
+  section .about-self .right .social a{
+    font-size:2.5rem;
+    margin-right:0.2rem;
+  }
+  
+  /* What I Do 영역의 CSS 코드 */
+  /* do-inner 클래스로 그룹 지은 본문만 스타일을 작성 */
+  
+  /* 부모 요소에서 자식 요소의 높이를 제대로 파악할 수 없으므로 float 속성 해제 (clear 속성 설정) */
+  section .do-me::after{
+    content:"";
+    display:block;
+    clear:both;
+  }
+  /* 사각형 크기와 간격, 내부 여백 설정 */
+  section .do-me .do-inner{
+    background-color:#fff;
+    width:30%;
+    padding:2rem; 
+    float:left;
+    margin-right:5%;
+    cursor:pointer;
+  }
+  /* 마지막 사각형의 외부 여백 설정 */
+  section .do-me .do-inner:last-child{
+    margin-right:0;
+  }
+  
+  /* What I Do 영역 텍스트 세부 조정 */
+  
+  /* 아이콘 폰트 크기와 색상 */
+  section .do-me .do-inner .icon i{
+    font-size:2.5rem;
+    color:#ff6a6a;
+  }
+  /* HTML5, CSS3, BootStrap v5.0 텍스트 크기와 간격 */
+  section .do-me .do-inner .content h3{
+    font-size:2rem;
+    margin:1rem 0;
+  }
+  /* 사각형 텍스트 크기 */
+  section .do-me .do-inner .content p{
+    font-size:1.15rem;
+  }
+  
+  /* :hover 속성을 활용해서 사각형 배경 처리 */
+  /* do-inner 클래스에 마우스를 올리면 배경색과 텍스트 색상 변경 */
+  section .do-me .do-inner:hover{
+    background-color:lightcoral;
+    color:white;
+  }
+  /* do-inner 클래스에 마우스를 올리면 아이콘 폰트 색상 변경 */
+  section .do-me .do-inner:hover i{
+    color:white;
+  }
+  
+  /* 배경 이미지를 넣어 페이지를 더 현대적으로 꾸미기 */
+  .bg{
+    background:url('../static/background1.jpg') center center;
+    background-size:cover;
+    background-attachment:fixed;
+    height:650px;
+  }
+  
+  /* 참고 */
+  /* section 태그는 항상 내부에 h2~h6 태그 중에서 1개 이상 사용하기를 권장합니다. 
+  그러나 배경 영역은 아무런 정보를 전하지 않는 단순히 디자인적 요소이므로 h2~h6 태그를 사용할 필요가 없습니다. 
+  그래서 section 태그 대신에 div 태그를 사용합니다.*/
+  
+  /* Portfolio 영역 본문 레이아웃 */
+  /* clear 속성으로 float 속성값 해제 */
+  section.portfolio::after{
+    content:"";
+    display:block;
+    clear:both;
+  }
+  /* portfolio-inner 사각형 꾸미기 */
+  section.portfolio .portfolio-inner{
+    width:30%;
+    margin-right:5%;
+    padding:1rem 1rem 1.5rem 1rem;
+    float:left;
+    background-color:#f8f8f8;
+    border:1px solid #ccc;
+    margin-bottom:3rem;
+  }
+  /* 3번째마다 margin-right 0 적용 */
+  section.portfolio .portfolio-inner:nth-child(3n){
+     margin-right:0;
+  }
+  
+  /* Portfolio 영역 본문 세부 설정 */
+  /* 이미지 크기가 부모 요소를 넘지 않도록 100%로 지정 */
+  section.portfolio .portfolio-inner img{
+    width:100%;
+    display:block;
+  }
+  /* strong 태그 색상과 간격 */
+  section.portfolio .portfolio-inner strong{
+    color:#ff6a6a;
+    margin:0.5rem 0;
+    display:block;
+  }
+  /* h3 태그 색상과 간격 */
+  section.portfolio .portfolio-inner h3{
+    font-size:1.75rem;
+  }
+  
+  /* Contact With Me 영역 본문 레이아웃 */
+  section.contact .contact-me::after{
+    content:"";
+    display:block;
+    clear:both;
+  }
+  section.contact .contact-me .left{
+    width:30%;
+    float:left;
+  }
+  section.contact .contact-me .right{
+    float:left;
+    width:65%;
+    margin-left:5%;
+  }
+  
+  /* Contact With Me 영역 본문 왼쪽 레이아웃 */
+  section.contact .contact-me .left .card{
+    border:1px solid #ccc;
+    padding:1rem;
+    display:flex;
+    align-items:center;
+    margin-bottom:1.25rem;
+  }
+  
+  /* Contact With Me 영역 본문 왼쪽 아이콘 폰트 꾸미기 */
+  section.contact .contact-me .left .card .icon i{
+    font-size:2rem;
+    margin-right:15px;
+  }
+  
+  /* Contact With Me 영역 본문 오른쪽 레이아웃 */
+  section.contact .contact-me .right{ 
+    float:left;
+    width:65%;
+    margin-left:5%;
+    margin-bottom:2rem;
+    border:1px solid #ccc;
+    padding:1rem;
+  }
+  
+  /* Contact With Me 영역 본문 오른쪽 폼 요소 */
+  /* form-group 사이 간격 지정 */
+  section.contact .contact-me .right .form-group{
+    margin-bottom:1.25rem;
+  }
+  /* label 태그가 인라인 성격이어서 외부 여백을 적용하기 위해 block으로 변경 */
+  section.contact .contact-me .right .form-group label{
+    display:block;
+    margin-bottom:0.85rem;
+  }
+  /* input 요소 꾸미기 */
+  section.contact .contact-me .right .form-group input{
+    padding:0.625rem;
+    width:100%;
+    outline:none;
+    border:1px solid #ccc;
+    border-radius:10px;
+  }
+  /* :focus 가상 클래스 선택자로 입력 요소에 커서가 활성화되면 파란색 테두리와 그림자 효과 추가 */ 
+  section.contact .contact-me .right .form-group input:focus{
+    border:1px solid #719ECE;
+    box-shadow:0 0 10px #719ECE;
+  }
+  /* textarea 요소 꾸미기 */
+  section.contact .contact-me .right .form-group textarea{
+    height:300px;
+    width:100%;
+    resize:none;
+    border:1px solid #ccc;
+    border-radius:10px;
+  }
+  /* textarea 요소에 커서가 활성화가 되면 파란색 테두리와 그림자 효과 추가 */
+  section.contact .contact-me .right .form-group textarea:focus{
+    outline:none;
+    border:1px solid #719ECE;
+    box-shadow:0 0 10px #719ECE;
+  }
+  /* 버튼 요소 꾸미기 */
+  section.contact .contact-me .right button{
+    width:100%;
+    padding:1rem;
+    background-color:#f78b00;
+    border:none;
+    color:white;
+  }
+  
+  /* 미디어 쿼리 ( Media Query ) 설정하기 */
+  /* 화면 너비가 1140px 이하일 때 */
+  @media screen and (max-width:1140px){
+    /* 해상도 1140px 이하일때 */
+    /* 메인 영역 container 기준 너비 변경 */
+    main .container{
+      width:992px; /* 1140px -> 992px */
+    }
+    /* 섹션 영역 container 기준 너비 변경 - 2단으로 처리하기 위한 적정 너비 */
+    section .container{
+      width:600px; /* 1140px -> 600px */ 
+    }
+  
+    /* 해상도 1140px 이하일때 About Me 영역 */
+    /* About Me 영역 왼쪽 너비 50% -> 100% 변경 */
+    section .about-self .left{
+      width:100%;
+      margin-bottom:1.5rem;
+    }
+    /* About Me 영역 오른쪽 너비 50% -> 100% 변경 */
+    section .about-self .right{
+      width:100%;
+      padding:0;
+    }
+  
+    /* 해상도 1140px 이하일때 What I Do 영역 */
+    section .do-me .do-inner{
+      width:48%; /* 본문 사각형 너비 30% -> 48% 변경 */
+      margin-bottom:1.5rem; /* 본문 사각형 사이 간격 지정 */
+      margin-right:0; /* 외부 여백 초기화 */
+    }
+    section .do-me .do-inner:nth-child(2n+1){
+      margin-right:4%; /* 1, 3, 5...번째 본문 사각형에 margin-right 4% 적용 */
+    }
+  
+    /* 해상도 1140px 이하일때 PortFolio 영역 */
+    section .portfolio-me .portfolio-inner{
+      width:48%; /* 본문 사각형 너비 30% -> 48% 변경 */
+      margin-right:0; /* 외부 여백 초기화 */
+    }
+    section .portfolio-me .portfolio-inner:nth-child(2n+1){
+      margin-right:4%; /* 1, 3, 5...번째 본문 사각형에 margin-right 4% 적용 */
+    }
+  
+    /* 해상도 1140px 이하일때 Contact With Me 영역 */
+    section.contact .contact-me .left{
+      width:100%; /* 너비 변경 30% -> 100% */
+    }
+    section.contact .contact-me .right{
+      width:100%; /* 너비 변경 65% -> 100% */
+      margin-left:0; /* 외부 여백 초기화 */
+    }
+  }
+  /* 화면 너비가 992px 이하일 때 */
+  @media screen and (max-width:992px){
+    html{
+      font-size:14px;     /* 해상도별 기준 font-size 변경 */
+    }
+    /* 메인 영역 container 기준 너비 변경 */
+    main .container{
+      width:768px; /* 992px -> 768px */
+    }
+    /* PortFolio 영역 본문 사각형 너비 변경 */
+    section .portfolio-me .portfolio-inner{
+      width:100%; /* 48% -> 100% 변경 */
+    } 
+  }
+  /* 화면 너비가 768px 이하일 때 */
+  @media screen and (max-width:768px){
+    html{
+      font-size:13px;   /* 해상도별 기준 font-size 변경 */
+    }
+    /* What I Do 영역은 기준너미가 768px 이하로 줄어들면 본문너비가 100%로 변경되어 모든 컨텐츠가 수직방향에 한 줄로 배치 */
+    main .container{
+      width:576px; /* 768px -> 576px */
+    }
+    section .container{
+      width:400px; /* 600px -> 400px */
+    }
+    section .do-me .do-inner{
+      width:100%; /* 48% -> 100% */
+      margin-right:0; /* 외부 여백 초기화 */
+    }  
+  }
+  /* 화면 너비가 576px 이하일 때 */
+  @media screen and (max-width:576px){
+    html{
+      font-size:12px;   /* 해상도별 기준 font-size 변경 */
+    }
+    /* 576px 일때는 container 클래스의 기준 너비를 바꾸는 것 말고 다른 처리는 하지 않음 */
+    main .container{
+      width:400px; /* 576px -> 400px */
+    }
+    section .container{
+      width:360px; /* 400px -> 360px */
+    }
+  }
+  /* 화면 너비가 400px 이하일 때 */
+  @media screen and (max-width:400px){
+    html{
+      font-size:11px;   /* 해상도별 기준 font-size 변경 */
+    }
+    /* 마지막으로 400px일 때는 container 클래스의 기준 너비만 바꾸면 메인 영역의 글자 비율이 줄어들어도 현재 해상도에서는 큰 편이어서 font-size 속성을 기존보다 조금 작게 재설정합니다. */
+    main .container{
+      width:320px; /* 400px -> 320px */
+    }
+    section .container{
+      width:320px; /* 360px -> 320px */
+    }
+    main h4{
+      font-size:1.5rem;
+    }
+    section .title h2{
+      font-size:3rem; /* 3.5rem -> 3rem */
+    }
+  }

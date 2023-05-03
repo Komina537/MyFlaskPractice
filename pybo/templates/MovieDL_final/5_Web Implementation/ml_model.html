@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='MovieDL_img/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js" type="text/javascript"></script>
+    <!-- Import the page's JavaScript to do some stuff -->
+    <script type="module" src="{{ url_for('static', filename='MovieDL_img/model_script.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+
+<body>
+    <header>
+        <div class="container"> <!-- HTML 구조의 핵심인 container 클래스가 포함된 div 태그 -->
+            <!-- <h1>
+            <button>5Os</button>
+          </h1> -->
+            <a href="{{ url_for('clock._clock') }}"><img src="{{ url_for('static', filename='MovieDL_img/5rings_logo.png') }}" style="width: 160px; height: 33px;"></a>
+            <nav>
+                <div class="dropdown">
+                    <img src="{{ url_for('static', filename='MovieDL_img/More1.png') }}" onclick="dp_menu()" class="drop_button" style="width: 30px; height: 30px;">
+                    <div style="display: none;" id="drop-content">
+                        <a href="{{ url_for('MovieDL._5rings') }}">About 5Os?</a>
+                        <a href="{{ url_for('MovieDL._ML_model') }}">ML / DL</a>
+                        <a href="{{ url_for('MovieDL._report') }}">Report</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main id="main">
+        <div class="container4">
+            <h4>Machine Learning & Deep Learning</h4>
+            <h2>너는 <span></span></h2> <!-- 'Front-End Developer' ==> span 태그 콘텐츠 비우기 -->
+            <p>관객수를 예측해 봅시다</p>
+            <br>
+            <button class="custom-btn btn-6" id="reg_btn">회귀 모델</button>
+            <button class="custom-btn btn-6" id="cls_btn">분류 모델</button>
+            <button class="custom-btn btn-6" id="all_btn">결과</button>
+
+        </div>
+    </main>
+    <div>
+    </div>
+    <div class="container">
+        <form>
+            <fieldset>
+                <div class="information1">
+                    <div class="info3">
+                        <div class="info1">
+                            <input type="text" placeholder="영화명" name="movie_name" id="movie_name">
+                            <input type='text' placeholder="배우" name="actors" id="actors">
+                            <input type='text' placeholder="감독" name="director" id="director">
+                            <input type='text' placeholder="배급사" name="distributor" id="distributor">
+                        </div>
+                        <div class="info2">
+                            <input type="number" min="51" max="817" placeholder="스크린수" name="screen" id="screen">
+                            <select class="form-select" name="genre" id="genre" aria-label="Default select example">
+                                <option value="none">=== 장르 ===</option>
+                                <option value=14>애니메이션</option>
+                                <option value=6>드라마</option>
+                                <option value=15>액션</option>
+                                <option value=3>공포(호러)</option>
+                                <option value=5>다큐멘터리</option>
+                                <option value=18>코미디</option>
+                                <option value=13>스릴러</option>
+                                <option value=0>SF</option>
+                                <option value=7>멜로/로맨스</option>
+                                <option value=9>미스터리</option>
+                                <option value=10>범죄</option>
+                                <option value=16>어드벤처</option>
+                                <option value=2>공연</option>
+                                <option value=8>뮤지컬</option>
+                                <option value=19>판타지</option>
+                                <option value=12>성인물(에로)</option>
+                                <option value=11>사극</option>
+                                <option value=1>가족</option>
+                                <option value=17>전쟁</option>
+                                <option value=4>기타</option>
+                            </select>
+
+                            <select class="form-select" aria-label="Default select example" id="film_rating">
+                                <option value="none">=== 등급 ===</option>
+                                <option value=2>전체 관람가</option>
+                                <option value=3>청소년 관람불가</option>
+                                <option value=1>15세 관람가</option>
+                                <option value=0>12세 관람가</option>
+                            </select>
+
+                            <input type="date" class="form-date" name="year" id="year"></input>
+                        </div>
+                    </div>
+                    <div class="button1">
+                        <input type='submit' , class="custom-btn btn-6" , value="입력" onclick="movie_result()"></input>
+                        <input type='reset' , class="custom-btn btn-6" , value="초기화"></input>
+                        <script>
+                            function movie_result() {
+                                alert('데이터 유효성 검사를 완료했습니다. 원하시는 모델을 선택해주세요');
+                            }
+                        </script>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <!-- <div class = "poster">
+        <img src ="./template/poster1.jpg">
+    </div> -->
+    <script type='text/javascript'>
+            function dp_menu(){
+        let click = document.getElementById("drop-content");
+        if(click.style.display === "none"){
+            click.style.display = "block";
+
+        }else{
+            click.style.display = "none";
+
+        }
+    }
+    // span 요소 노드 가져오기
+const spanEl = document.querySelector("main h2 span");
+// 화면에 표시할 문장 배열
+const txtArr = ['영화명을 입력하고 싶어진다', '배우를 입력하고 싶어진다', '장르를 선택하고 싶어진다', '예측 버튼을 누르고 싶어진다', '한번 더 검색하고 싶어진다'];
+// 배열의 인덱스 초깃값
+let index = 0;
+// 화면에 표시할 문장 배열에서 요소를 하나 가져온 뒤, 배열로 만들기
+let currentTxt = txtArr[index].split("");
+
+// 텍스트 작성과 삭제 즉시 실행 함수 [ 형식 =>  (함수... 중략....)(); ]
+(function(){
+    const spanEl = document.querySelector("main h2 span");
+    const txtArr = ['영화명을 입력하고 싶어진다', '배우를 입력하고 싶어진다', '장르를 선택하고 싶어진다', '예측 버튼을 누르고 싶어진다', '한번 더 검색하고 싶어진다'];
+    let index = 0;
+    let currentTxt = txtArr[index].split("");
+    // 텍스트 입력 효과 구현하기
+    function writeTxt(){
+        spanEl.textContent += currentTxt.shift(); // ①
+        if(currentTxt.length !== 0){ // ②
+            setTimeout(writeTxt, Math.floor(Math.random() * 100));
+        }else{ // ③
+            currentTxt = spanEl.textContent.split("");
+            setTimeout(deleteTxt, 3000);
+        }
+    }
+
+    //텍스트 삭제 효과 구현하기
+    function deleteTxt(){
+        currentTxt.pop(); // ①
+        spanEl.textContent = currentTxt.join("");// ②
+        if(currentTxt.length !== 0){ // ③
+            setTimeout(deleteTxt, Math.floor(Math.random() * 100));
+        }else{ // ④
+            index = (index + 1) % txtArr.length;
+            currentTxt = txtArr[index].split("");
+            writeTxt();
+        }
+    }
+    writeTxt();
+})();
+
+
+    </script>
+</body>
+
+</html>

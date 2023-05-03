@@ -1,0 +1,542 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Varela+Round&display=swap');
+
+@font-face {
+  font-family: 'SBAggroB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+img {
+  width: 100%;
+  /* height: 600px; */
+  object-fit: cover;
+}
+
+.info1 input {
+  width: 140px;
+  height: 33px;
+  margin-top: 4px;
+  margin-right: 2px;
+}
+
+.info2 input {
+  width: 173px;
+  height: 30px;
+  margin-top: 2px;
+  margin-right: 2px;
+}
+
+.info2 .form-date {
+  width: 180px;
+  height: 32px;
+  /* margin-left: 1px; */
+  margin-top: 2px;
+  margin-right: 3px;
+}
+
+form .form-select {
+  width: 180px;
+  height: 36px;
+  margin-top: 2px;
+  margin-right: 2px;
+}
+
+.container {
+  /* width: 350px;
+    height: 200px; */
+  /* display: inline-block; */
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+
+}
+
+.poster {
+  width: 100%;
+}
+
+.information1 {
+  width: 80%;
+  display: flex;
+  margin-top: 4px;
+}
+
+.info3 {
+  display: flex;
+  /* justify-content: center; */
+  /* justify-content: space-between */
+  flex-direction: column;
+}
+
+.info1 {
+  width: 600px;
+  display: flex;
+}
+
+.info2 {
+  width: 600px;
+  display: flex;
+}
+
+
+.button1 {
+  margin-left: 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.button1 input {
+  margin-bottom: 1px;
+}
+
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  padding: 10px 25px;
+  border: 2px solid #000;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+/* 6 */
+.btn-6 {
+  background: #2f2e2e;
+  color: #fff;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+}
+
+.btn-6 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-6:before,
+.btn-6:after {
+  position: absolute;
+  content: "";
+  height: 0%;
+  width: 2px;
+  background: #000;
+}
+
+.btn-6:before {
+  right: 0;
+  top: 0;
+  transition: all 500ms ease;
+}
+
+.btn-6:after {
+  left: 0;
+  bottom: 0;
+  transition: all 500ms ease;
+}
+
+.btn-6:hover {
+  color: #d81111;
+  background: transparent;
+}
+
+.btn-6:hover:before {
+  transition: all 500ms ease;
+  height: 100%;
+}
+
+.btn-6:hover:after {
+  transition: all 500ms ease;
+  height: 100%;
+}
+
+.btn-6 span:before,
+.btn-6 span:after {
+  position: absolute;
+  content: "";
+  background: #000;
+}
+
+.btn-6 span:before {
+  left: 0;
+  top: 0;
+  width: 0%;
+  height: 2px;
+  transition: all 500ms ease;
+}
+
+.btn-6 span:after {
+  right: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  transition: all 500ms ease;
+}
+
+.btn-6 span:hover:before {
+  width: 100%;
+}
+
+.btn-6 span:hover:after {
+  width: 100%;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+.container1 {
+  width: 1500px;
+  display: flex;
+  justify-content: center;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+
+
+.container1 .profile_1 {
+  width: 400px;
+  height: 200px;
+  background-color: rgb(82, 82, 82);
+  display: flex;
+  margin-right: 100px;
+  margin-bottom: 100px;
+}
+
+.container1 .profile_2 {
+  width: 400px;
+  height: 200px;
+  background-color: rgb(82, 82, 82);
+  display: flex;
+  margin-right: 100px;
+  margin-bottom: 100px;
+}
+
+.container1 .profile_3 {
+  width: 400px;
+  height: 200px;
+  background-color: rgb(82, 82, 82);
+  display: flex;
+  /* margin-right:100px;*/
+  margin-bottom: 100px;
+}
+
+.container1 .profile_4 {
+  width: 400px;
+  height: 200px;
+  background-color: rgb(82, 82, 82);
+  display: flex;
+  margin-right: 100px;
+}
+
+.container1 .profile_5 {
+  width: 400px;
+  height: 200px;
+  background-color: rgb(82, 82, 82);
+  display: flex;
+  margin-right: 100px;
+}
+
+.container1 .profile_6 {
+  width: 400px;
+  height: 200px;
+  background-color: purple;
+  display: flex;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+body {
+  background-color: black;
+}
+
+header h1 {
+  margin: 0px;
+  color: white;
+}
+
+header button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+header h1 button {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+header h2 {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+main {
+  width: 100%;
+  height: 60vh;
+  color: white;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('sea_night background.png') center center;
+  /*배경색이 이미지를 덮는 효과*/
+  background-size: cover;
+  display: flex;
+  /* 수직 방향에서 요소들이 중앙에 위치하도록 display 속성값을 flex로 지정 */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+main h4 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+main h2 {
+  font-size: 3.5rem;
+  margin: 2rem 0;
+  letter-spacing: 3px;
+  letter-spacing: 3px;
+  font-family: 'Lato', sans-serif;
+  /* font-family:"Varela Round", sans-serif; 구글 폰트 적용 */
+  font-weight: bold;
+}
+
+main p {
+  max-width: 500px;
+  /* 500픽셀 넘어가는 글자가 들어오면 자동으로 줄바뀌도록 */
+  margin: 0 auto;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+/* 메인 화면 텍스트의 끝에 커서 모양을 만들기 */
+main h2 span::after {
+  content: "";
+  /* 텍스트 마지막에 */
+  height: 40px;
+  /* 너비 3px , 높이 40px 크기의 */
+  width: 3px;
+  background-color: #fff;
+  /* 배경색이 투명한 막대를 만든다. */
+  display: inline-block;
+  /* inline-block을 이용하면 여러 개의 엘리먼트를 한 줄에 정확히 원하는 너비만큼 배치할 수 있기 때문에 레이아웃에 활용할 수 있습니다 */
+  animation: blink .7s ease-in-out infinite;
+  /* 0.7초마다 깜박거리도록 만드는 속성 (무한으로) */
+}
+
+@keyframes blink {
+
+  /* blink 속성값에 대한 정보 */
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.imgbox {
+  margin: auto;
+  display: block;
+  text-align: center;
+  width: 70%;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.drop_button {
+  padding: 10px 10px 0px 150px;
+  font-size: 20px;
+  background-color: rgb(0, 0, 0);
+  color: wheat;
+}
+
+#drop-content {
+  position: absolute;
+  z-index: 1;
+}
+
+#drop-content a {
+  display: block;
+  font-size: 20px;
+  background-color: #dfdfdf;
+  color: black;
+  text-decoration: none;
+  padding: 10px 36px;
+  margin: 2px 0px 0px 0px;
+}
+
+.profile_img {
+  position: relative;
+  top: 25px;
+  left: -60px;
+}
+
+.profile_name {
+  text-align: left;
+
+}
+
+.donut {
+  width: calc(45%);
+  padding-bottom: calc(45%);
+  margin: 0;
+  border-radius: 50%;
+  position: relative;
+  text-align: center;
+}
+
+.donut::before {
+  color: #fff;
+  width: 70%;
+  background: #264057;
+  border-radius: 50%;
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  display: block;
+  content: '';
+  transform: skew();
+  margin: 0;
+  font-weight: 800;
+  font-size: 2vw;
+  padding: calc(35%) 0;
+}
+
+.donut-container {
+  margin: 0 20vw 1rem 20vw;
+}
+
+.fade-out-box {
+  display: inline-block;
+  animation: fadeout 3s;
+  -moz-animation: fadeout 3s;
+  /* Firefox */
+  -webkit-animation: fadeout 3s;
+  /* Safari and Chrome */
+  -o-animation: fadeout 3s;
+  /* Opera */
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes fadeout {
+
+  /* Firefox */
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes fadeout {
+
+  /* Safari and Chrome */
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@-o-keyframes fadeout {
+
+  /* Opera */
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-in-box {
+  animation: fadein 3s;
+  -moz-animation: fadein 3s;
+  /* Firefox */
+  -webkit-animation: fadein 3s;
+  /* Safari and Chrome */
+  -o-animation: fadein 3s;
+  /* Opera */
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadein {
+
+  /* Firefox */
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadein {
+
+  /* Safari and Chrome */
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadein {
+
+  /* Opera */
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

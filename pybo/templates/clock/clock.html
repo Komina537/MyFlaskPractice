@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+
+        <div class="container99">
+            <div id="date"></div>
+            <div class="cal-clock"><h1 class="clock"></h1></div>
+            <div class="mybtn" id="contents">
+<!--                <div class="myButton">Click !!</div>-->
+                    <!-- <button class="myButton">Click !!</button> -->
+                
+            </div>
+        </div>
+<!--        <div id="popup">-->
+<!--            <div class="popmenu">-->
+<!--                <div class="popup-left">-->
+<!--                    <form action="/login" method="post">-->
+<!--                        <div class="ID">-->
+<!--                            <p>ID<input type="text"></p>-->
+<!--                        </div>-->
+<!--                        <div class="PW">-->
+<!--                            <p>PW<input type="password"></p>-->
+<!--                        </div>-->
+<!--                    </form> -->
+<!--                </div>-->
+<!--                <div class="popup-right">-->
+<!--                        <button class="exit" type="submit">Login</button>-->
+<!--                </div>  -->
+<!--            </div>-->
+<!--        </div>-->
+
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript'>
+var clock = document.querySelector('.clock');
+  function getClock(){
+    const dateInfo = new Date();
+    const year = dateInfo.getFullYear();
+    const month = dateInfo.getMonth()+1;
+    const date = dateInfo.getDate();
+    const hours = String(dateInfo.getHours()).padStart(2,"0");
+    const min = String(dateInfo.getMinutes()).padStart(2,"0");
+    const sec = String(dateInfo.getSeconds()).padStart(2,"0");
+    clock.innerHTML = `${hours}:${min}:${sec}`;
+    // clock.innerText = `${date.getHours()}:${date.getMinutes()}:${00 + date.getSeconds()}`;
+    document.getElementById("date").innerHTML = year + "년 " + month + "월 " + date + "일";
+  }
+
+  getClock(); //1초 딜레이 없애기
+  setInterval(getClock, 1000);
+
+
+
+<!--$(document).ready(function() {-->
+
+<!--    $(".myButton").click(function() {-->
+
+<!--        $("#popup").fadeIn();-->
+
+<!--    });-->
+
+<!--    $(".exit").click(function() {-->
+
+<!--        $("#popup").fadeOut();-->
+
+<!--    });-->
+
+<!--});-->
+</script>
+{% endblock %}

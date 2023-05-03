@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='MovieDL_img/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js" type="text/javascript"></script>
+    <!-- Import the page's JavaScript to do some stuff -->
+    <script type="module" src="./model_script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+
+<body>
+    <header>
+        <div class="container"> <!-- HTML 구조의 핵심인 container 클래스가 포함된 div 태그 -->
+            <!-- <h1>
+            <button>5Os</button>
+          </h1> -->
+            <a href="{{ url_for('clock._clock') }}"><img src="{{ url_for('static', filename='MovieDL_img/5rings_logo.png') }}" style="width: 160px; height: 33px;"></a>
+            <nav>
+                <div class="dropdown">
+                    <img src="{{ url_for('static', filename='MovieDL_img/More1.png') }}" onclick="dp_menu()" class="drop_button" style="width: 30px; height: 30px;">
+                    <div style="display: none;" id="drop-content">
+                        <a href="{{ url_for('MovieDL._5rings') }}">About 5Os?</a>
+                        <a href="{{ url_for('MovieDL._ML_model') }}">ML / DL</a>
+                        <a href="{{ url_for('MovieDL._report') }}">Report</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    </div>
+    <div class="imgbox"><img src="{{ url_for('static', filename='MovieDL_img/logo2.png') }}"></div>
+    <!-- <div class = "poster">
+        <img src ="./template/poster1.jpg">
+    </div> -->
+    <script type='text/javascript'>
+            function dp_menu(){
+        let click = document.getElementById("drop-content");
+        if(click.style.display === "none"){
+            click.style.display = "block";
+
+        }else{
+            click.style.display = "none";
+
+        }
+    }
+    </script>
+</body>
+
+</html>

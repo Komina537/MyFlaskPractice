@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='MovieDL_img/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="container"> <!-- HTML 구조의 핵심인 container 클래스가 포함된 div 태그 -->
+            <!-- <h1>
+            <button>5Os</button>
+          </h1> -->
+            <a href="{{ url_for('clock._clock') }}"><img src="{{ url_for('static', filename='MovieDL_img/5rings_logo.png') }}" style="width: 160px; height: 33px;"></a>
+            <nav>
+                <div class="dropdown">
+                    <img src="{{ url_for('static', filename='MovieDL_img/More1.png') }}" onclick="dp_menu()" class="drop_button" style="width: 30px; height: 30px;">
+                    <div style="display: none;" id="drop-content">
+                        <a href="{{ url_for('MovieDL._5rings') }}">About 5Os?</a>
+                        <a href="{{ url_for('MovieDL._ML_model') }}">ML / DL</a>
+                        <a href="{{ url_for('MovieDL._report') }}">Report</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div>
+            <h2>Orings ? 5rings !</h2>
+        </div>
+    </header>
+
+
+    <main>
+        <div class="container1">
+            <div class="profile_1">
+                <div class="profile_img"><img src="{{ url_for('static', filename='MovieDL_img/tae.png') }}", style="width:150px; height:150px;"></div>
+                <div class="profile_name"><img src="{{ url_for('static', filename='MovieDL_img/001.png') }}", style="width:150px; height:50px;">
+                    <pre></pre>
+                    <li>데이터 수집 및 기초 전처리</li>
+                    <li>딥러닝 모델 선정 및 학습</li>
+                    <li>파라미터 조정</li>
+                    <li>Web 구현 (js)</li>
+                </div>
+            </div>
+
+            <div class="profile_2">
+                <div class="profile_img"><img src="{{ url_for('static', filename='MovieDL_img/osj.png') }}" , style="width:150px; height:150px;"></div>
+                <div class="profile_name"><img src="{{ url_for('static', filename='MovieDL_img/002.png') }}" , style="width:150px; height:50px;">
+                    <pre></pre>
+                    <li>데이터 전처리</li>
+                    <li>딥러닝 모델 선정 및 학습</li>
+                    <li>파라미터 조정</li>
+                    <li>Web 구현 (HTML, CSS)</li>
+                </div>
+            </div>
+
+            <div class="profile_3">
+                <div class="profile_img"><img src="{{ url_for('static', filename='MovieDL_img/suyeon.png') }}" , style="width:150px; height:150px;"></div>
+                <div class="profile_name"><img src="{{ url_for('static', filename='MovieDL_img/003.png') }}" , style="width:150px; height:50px;">
+                    <pre></pre>
+                    <li>데이터 전처리, 점수화</li>
+                    <li>딥러닝 모델 선정 및 학습</li>
+                    <li>파라미터 조정</li>
+                    <li>보고서 작성</li>
+                </div>
+            </div>
+
+            <div class="profile_4">
+                <div class="profile_img"><img src="{{ url_for('static', filename='MovieDL_img/lee.jpg') }}" , style="width:150px; height:150px;"></div>
+                <div class="profile_name"><img src="{{ url_for('static', filename='MovieDL_img/004.png') }}" , style="width:150px; height:50px;">
+                    <pre></pre>
+                    <li>데이터 전처리, 점수화</li>
+                    <li>딥러닝 모델 선정 및 학습</li>
+                    <li>파라미터 조정</li>
+                    <li>보고서 작성</li>
+                </div>
+
+            </div>
+            <div class="profile_5">
+                <div class="profile_img"><img src="{{ url_for('static', filename='MovieDL_img/gong.jpg') }}" , style="width:150px; height:150px;"></div>
+                <div class="profile_name"><img src="{{ url_for('static', filename='MovieDL_img/005.png') }}" , style="width:150px; height:50px;">
+                    <pre></pre>
+                    <li>추가 분석용 웹 크롤링</li>
+                    <li>크롤링 데이터 전처리</li>
+                    <li>딥러닝 모델 선정</li>
+                    <li>파라미터 조정</li>
+                    <li>보고서 작성</li>
+                </div>
+
+            </div>
+            <!-- <div class = "profile_6">
+                <img src ="./template/5rings.png", style = "width:150px; height:150px;">
+            </div> -->
+        </div>
+    </main>
+    <script type='text/javascript'>
+            function dp_menu(){
+        let click = document.getElementById("drop-content");
+        if(click.style.display === "none"){
+            click.style.display = "block";
+
+        }else{
+            click.style.display = "none";
+
+        }
+    }
+    </script>
+</body>
+
+</html>

@@ -21,7 +21,7 @@ bp = Blueprint('main', __name__, url_prefix='/')
 
 @bp.route('/hello')
 def hello_pybo():
-    return 'Hello, Pybo!'
+    return redirect(url_for('clock._clock'))
 
 
 
@@ -44,7 +44,8 @@ def index():
     # 템플릿에서 해당 데이터로 화면을 구성할수 있다. 여기서 사용한 question/question_list.html 파일을
     # 템플릿 파일이라고 부른다.
 
-    return redirect(url_for('question._list'))  # 2-05 url_for로 리다이렉트 기능 추가하기
+    return redirect(url_for('clock._clock'))
+    # return redirect(url_for('question._list'))  # 2-05 url_for로 리다이렉트 기능 추가하기
     # detail 함수는 제거하고 index 함수는 question._list에 해당하는 URL로 리다이렉트(redirect)하도록 코드를 수정했다.
     # redirect 함수는 입력받은 URL로 리다이렉트하고, url_for 함수는 라우팅 함수명으로 URL을 역으로 찾는 함수이다.
     # redirect(URL) - URL로 페이지를 이동

@@ -6,3 +6,169 @@ textarea {
 input[type=submit] {
     margin-top:10px;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Varela+Round&display=swap');
+
+* {
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+body {
+    background:linear-gradient(rgba(90, 90, 90,0.8), rgba(90,90,90,0.8)), url('../static/background1.jpg'); /*center center; /*배경색이 이미지를 덮는 효과 */
+    background-size: cover;
+
+}
+p{
+    margin:0 auto;
+}
+h1 {
+    margin:0;
+}
+
+button {
+    margin:0;
+}
+
+body .container99 .cal-clock .clock {
+    font-size: 250px;
+    font-family: "Varela Round", sans-serif;;
+    color : white;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+#date {
+    font-size: 130px;
+    font-family: "Varela Round", sans-serif;
+    color : white;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    margin:150px 0 0 0;
+    font-weight:bold;
+
+}
+.container .mybtn {
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+
+.container .mybtn .myButton {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border-radius:16px;
+	border:1px solid #dcdcdc;
+	display: flex; /*inline-block;*/
+	cursor:pointer;
+	color:#666666;
+	font-family:"Varela Round", sans-serif;
+	font-size:100px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.container .mybtn .myButton:hover {
+	background:linear-gradient(to bottom, #d0cbcb 5%, #9f9e9e 100%);
+	background-color:#f6f6f6;
+}
+.container .mybtn .myButton:active {
+	position:relative;
+	top:1px;
+}
+
+#popup {
+    display: none; /*숨기기*/
+    position: absolute; /*fixed -> absolute */
+    top:0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(90, 90, 90,0.8), rgba(90,90,90,0.8));
+    z-index: 1px;
+}
+
+.popmenu {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 15px;
+    width: 580px;
+    height: 200px;
+    text-align: center;
+    background: linear-gradient(rgba(220, 220, 220, 0.8), rgba(90,90,90,0.8));
+    content:"";
+    clear:both;
+    display:block;
+}
+
+.popmenu p {
+    /* margin: 60px 40px auto 40px; */
+    font-family:"Varela Round", sans-serif;
+    font-size:40px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.popmenu input {
+    border : 0;
+    border-radius: 15px;
+    font-size:16px;
+    width:225px;
+    height: 32px;
+    text-align: center;
+
+}
+
+.exit {
+    position: absolute;
+    left: 80%;
+    transform: translate(-50%,0);
+    width: 110px;
+    height: 95px;
+    text-align: center;
+    line-height: 100px;
+    background: #cf907b;
+    cursor: pointer;
+    align-items:center;
+    border-radius: 30px;
+    font-family:"Varela Round", sans-serif;
+    font-size: 25px;
+    font-weight:bold;
+    color:white;
+}
+
+.exit:hover {
+	background:linear-gradient(to bottom, #cf907b 5%, #e2cece 100%);
+	background-color:#f6f6f6;
+}
+  .popup-left {
+    width:56%;
+    float:left;
+    margin:50px auto auto 60px;
+  }
+
+  .popup-right{
+    width:15%;
+    padding:0 2rem;
+    display:inline-block;
+    margin-top:55px;
+    font-family:"Varela Round", sans-serif;
+  }
+
+  #navbarSupportedContent1 {
+    display: flex;
+    justify-content: flex-end;
+  }

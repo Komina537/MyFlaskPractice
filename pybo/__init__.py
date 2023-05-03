@@ -60,11 +60,14 @@ def create_app():   # create_app 함수가 애플리케이션 팩토리
 
     # 블루프린트
     # 플라스크에서는 URL과 함수의 매핑을 관리하기 위해 사용하는 도구(클래스)이다.
-    from .views import main_views, question_views, answer_views, auth_views
+    from .views import main_views, question_views, answer_views, auth_views, clock_views, whoiam_views, MovieDL_views
     app.register_blueprint(main_views.bp)
     app.register_blueprint(question_views.bp)   # 2-05 질문 목록과 질문 상세 기능 만들기
     app.register_blueprint(answer_views.bp)     # 2-06 답변 등록 기능 만들기
     app.register_blueprint(auth_views.bp)
+    app.register_blueprint(clock_views.bp)
+    app.register_blueprint(whoiam_views.bp)
+    app.register_blueprint(MovieDL_views.bp)
 
     # 3-03 템플릿 필터 직접 만들어보기
     # 필터
