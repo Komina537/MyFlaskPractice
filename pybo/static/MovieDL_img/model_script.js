@@ -1,6 +1,6 @@
 
-const model1 = await tf.loadLayersModel('http://127.0.0.1:5500/reg/model.json');
-const model2 = await tf.loadLayersModel('http://127.0.0.1:5500/cls/model.json');
+const model1 = await tf.loadLayersModel('http://127.0.0.1:5000/static/MovieDL_img/reg/model.json');
+const model2 = await tf.loadLayersModel('http://127.0.0.1:5000/static/MovieDL_img/cls/model.json');
 let inputData1;
 let outputData1;
 let inputData2;
@@ -21,7 +21,7 @@ let total_people = [{ 2018: 0.01883919 }, { 2009: -0.85400814 }, { 2022: -1.4636
 // console.log(output[0])
 
 
-fetch("movie_top_300.json")
+fetch("http://127.0.0.1:5000/static/MovieDL_img/movie_top_300.json")
     .then(response => response.json())
     .then(data => {
         jsondata = data;
@@ -203,8 +203,8 @@ document.getElementById("reg_btn").onclick = () => {
 
     const newVideoElement = document.createElement('VIDEO');
     newVideoElement.setAttribute('id', 'myVideo');
-    newVideoElement.setAttribute("src", './countdown.mp4');
-    newVideoElement.setAttribute("width", "1980"); // 동영상 가로크기
+    newVideoElement.setAttribute("src", '../../static/MovieDL_img/countdown.mp4');
+    newVideoElement.setAttribute("width", "100%"); // 동영상 가로크기
     newVideoElement.setAttribute("height", "1100"); // 동영상 세로크기
     newVideoElement.setAttribute('autoplay', 'true');
     document.getElementById('result').appendChild(newVideoElement);
@@ -217,9 +217,9 @@ document.getElementById("reg_btn").onclick = () => {
         setTimeout(function () {
             video.remove(video);
             //newDivEl.classList.add('fade-in-box');
-            newDivEl.style.backgroundImage = 'url(./img/screen.png)';
+            newDivEl.style.backgroundImage = 'url(../../static/MovieDL_img/img/screen.png)';
             newDivEl.style.backgroundSize = 'cover';
-            newDivEl.style.width = '1920px';
+            newDivEl.style.width = '100%';
             newDivEl.style.height = '955px';
 
             newDivEl.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -307,7 +307,7 @@ document.getElementById("cls_btn").onclick = () => {
     const newVideoElement = document.createElement('VIDEO');
     newVideoElement.setAttribute('id', 'myVideo');
     newVideoElement.setAttribute("src", './countdown.mp4');
-    newVideoElement.setAttribute("width", "1980"); // 동영상 가로크기
+    newVideoElement.setAttribute("width", "100%"); // 동영상 가로크기
     newVideoElement.setAttribute("height", "1100"); // 동영상 세로크기
     newVideoElement.setAttribute('autoplay', 'true');
     document.getElementById('result').appendChild(newVideoElement);

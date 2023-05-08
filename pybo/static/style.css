@@ -172,3 +172,20 @@ body .container99 .cal-clock .clock {
     display: flex;
     justify-content: flex-end;
   }
+
+/* 13/end/css/what_i_do.css - What I Do 영역 텍스트 세부 조정 */
+
+    /* 아이콘 폰트 크기와 색상 */
+    section .do-me .do-inner .icon i{
+      font-size:2.5rem;
+      color:#ff6a6a;
+    }
+    /* HTML5, CSS3, BootStrap v5.0 텍스트 크기와 간격 */
+    section .do-me .do-inner .content h3{
+      font-size:2rem;
+      margin:1rem 0;
+    }
+    /* 사각형 텍스트 크기 */
+    section .do-me .do-inner .content p{
+      font-size:1.15rem;
+    }
